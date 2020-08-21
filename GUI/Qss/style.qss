@@ -1,0 +1,47 @@
+
+
+MainWindow{
+    background: #DDDDDD;
+}
+
+MainWidget {
+    background: #F8F8F8;
+} 
+
+TitleBar {
+    background: #DDDDDD;
+}
+
+TitleLabel {
+    background-color: #DDDDDD;
+    border: none;
+    padding: 4px;
+    width: 80px;
+    height: 20px;
+}
+
+MinButton, MaxButton, CloseButton {
+    background-color: #DDDDDD;
+    border: none;
+    padding: 4px;
+    width: 60px;
+    height: 20px;
+}
+
+MinButton:hover, MinButton:pressed, MaxButton:hover, MaxButton:pressed {
+    background-color: #C6C6C6;
+}
+
+CloseButton:hover, CloseButton:pressed {
+    background-color: #E72536;
+    color: #FFFFFF;
+}
+
+/*
+color 
+
+#F3F3F3
+#FFFFFF
+#929292
+#ECECEC
+*/
