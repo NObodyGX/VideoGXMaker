@@ -37,6 +37,44 @@ CloseButton:hover, CloseButton:pressed {
     color: #FFFFFF;
 }
 
+VideoContain {
+    background-color: #C6C6C6;
+    min-width: 100px;
+    min-height: 100px;
+}
+
+VideoSplitter::handle {
+    background-color: #F0F0F0;
+}
+
+VideoContainSplitter::handle {
+    background-color: #F0F0F0;
+}
+
+VideoPlayer {
+    background-color: #C6C6C6;
+    min-width: 100px;
+    min-height: 100px;
+}
+
+VideoInfo {
+    background-color: #C6C6C6;
+    min-width: 100px;
+    min-height: 100px;
+}
+
+VideoMaker {
+    background-color: #C6C6C6;
+    min-width: 100px;
+    min-height: 100px;
+}
+
+VideoTopSplitter {
+    min-height: 200px;
+}
+
+
+
 /*
 color 
 

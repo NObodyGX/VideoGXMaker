@@ -1,8 +1,8 @@
 from PyQt5.QtGui import QResizeEvent
 from PyQt5.QtWidgets import QFrame, QVBoxLayout
-from .title_bar import TitleBar
 from PyQt5.QtCore import pyqtSignal, Qt
-
+from .title_bar import TitleBar
+from .video_widget import VideoWidget
 
 class MainWidget(QFrame):
 
@@ -21,7 +21,9 @@ class MainWidget(QFrame):
         self.title = TitleBar(self)
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.layout.addWidget(self.title)
-        self.layout.addStretch()
+        self.layout.addSpacing(5)
+        self.video = VideoWidget(self)
+        self.layout.addWidget(self.video)
         self.setLayout(self.layout)
         self.show()
 
@@ -47,4 +49,3 @@ class MainWidget(QFrame):
     
     def resizeEvent(self, e: QResizeEvent) -> None:
         super().resizeEvent(e)
-        # self.title.setFixedWidth(e.size().width())

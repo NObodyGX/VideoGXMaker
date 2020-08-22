@@ -4,19 +4,6 @@ from PyQt5.QtWidgets import QHBoxLayout
 from PyQt5.QtCore import pyqtSignal
 
 
-class MinButton(QPushButton):
-    pass
-
-class MaxButton(QPushButton):
-    pass
-
-class CloseButton(QPushButton):
-    pass
-
-class TitleLabel(QPushButton):
-    pass
-
-
 class TitleBar(QFrame):
 
     window_min_single = pyqtSignal()
@@ -69,3 +56,16 @@ class TitleBar(QFrame):
 
     def mouseDoubleClickEvent(self, event: QMouseEvent) -> None:
         self.window_max()
+
+
+class MinButton(QPushButton):
+    pass
+
+class MaxButton(QPushButton):
+    pass
+
+class CloseButton(QPushButton):
+    pass
+
+class TitleLabel(QPushButton):
+    pass
