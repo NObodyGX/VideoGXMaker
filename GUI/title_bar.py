@@ -1,7 +1,7 @@
 from PyQt5.QtGui import QMouseEvent
-from PyQt5.QtWidgets import QFrame, QPushButton, QLabel, QWidget
+from PyQt5.QtWidgets import QAction, QFrame, QMenu, QPushButton, QLabel, QWidget
 from PyQt5.QtWidgets import QHBoxLayout
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import QPoint, Qt, pyqtSignal
 
 
 class TitleBar(QFrame):
@@ -21,10 +21,12 @@ class TitleBar(QFrame):
         self.setFixedHeight(30)
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.label = TitleLabel('Title')
+        self.menu = FileMenu('File')
         self.min_button = MinButton('min')
         self.max_button = MaxButton('max')
         self.close_button = CloseButton('close')
         self.layout.addWidget(self.label)
+        self.layout.addWidget(self.menu)
         self.layout.addStretch(1)
         self.layout.addWidget(self.min_button)
         self.layout.addStretch(0)
@@ -69,3 +71,35 @@ class CloseButton(QPushButton):
 
 class TitleLabel(QPushButton):
     pass
+
+class TitleMenu(QLabel):
+    def __init__(self, *args, **kw):
+        super().__init__(*args, **kw)
+
+    def global_pos(self):
+        x = self.frameGeometry().x()
+        y = self.frameGeometry().y()
+        width = self.frameGeometry().width()
+        height = self.frameGeometry().height()
+        return self.mapToGlobal(QPoint(x - width - 8, y + height))
+
+
+class FileMenu(TitleMenu):
+    def __init__(self, *args, **kw):
+        super().__init__(*args, **kw)
+
+    # def mousePressEvent(self, e: QMouseEvent):
+    #     if e.button() == Qt.LeftButton:
+    #         menu = TitleMenu(self)
+    #         menu.addAction(QAction('open', menu))
+    #         menu.addAction(QAction('open1', menu))
+    #         menu.addAction(QAction('open2', menu))
+    #         menu.triggered.connect(self.menuSlot)
+    #         menu.exec_(self.global_pos())
+    
+    # def menuSlot(self, action):
+    #     if action.text() == 'open':
+    #         print('do open')
+
+# class TitleMenu(QMenu):
+#     pass

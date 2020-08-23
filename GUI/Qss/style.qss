@@ -12,12 +12,27 @@ TitleBar {
     background: #DDDDDD;
 }
 
-TitleLabel {
+TitleLabel, TitleMenu {
     background-color: #DDDDDD;
     border: none;
     padding: 4px;
     width: 80px;
     height: 20px;
+}
+
+TitleMenu:hover, TitleMenu:pressed {
+    background-color: #C6C6C6; 
+}
+
+TitleMenu::item {
+    background-color: #DDDDDD;
+    border-bottom: None;
+    width: 80px;
+    height: 30px;
+}
+
+TitleMenu::item:selected {
+    background-color: #C6C6C6;
 }
 
 MinButton, MaxButton, CloseButton {
