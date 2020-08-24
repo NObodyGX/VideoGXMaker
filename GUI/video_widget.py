@@ -12,8 +12,7 @@ class VideoWidget(QFrame):
     
     def init_ui(self):
         """
-        当直接使用 sp.add(video_contain) 和 sp.add(video_info)时
-        使用 sp2.add 无法调整初始布局大小，这里额外增加一层
+        使用两个 splitter 无法调整外面一层的初始布局大小，这里额外增加一层
         """
         self.video_contain = VideoContain(self)
         main_splitter = VideoSplitter(Qt.Vertical)
