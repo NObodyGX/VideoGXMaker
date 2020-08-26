@@ -1,6 +1,6 @@
 from PyQt5.QtGui import QDragEnterEvent, QDropEvent
 from PyQt5.QtWidgets import QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton, QSplitter, QVBoxLayout, QWidget
-
+from .video_player import VideoPlayer
 
 
 class VideoContain(QFrame):
@@ -24,35 +24,6 @@ class VideoContain(QFrame):
 
     def init_function(self):
         pass
-
-
-class VideoPlayer(QFrame):
-    def __init__(self, parent=None) -> None:
-        super().__init__(parent)
-        self.parent = parent
-        self.init_ui()
-        self.init_function()
-
-    def init_ui(self):
-        self.layout = QVBoxLayout()
-        self.label = QLabel('empty!!!')
-        self.layout.addWidget(self.label)
-        self.setLayout(self.layout)
-        self.show()
-
-
-    def init_function(self):
-        self.setAcceptDrops(True)
-
-    def dragEnterEvent(self, e: QDragEnterEvent) -> None:
-        if e.mimeData().text():
-            e.accept()
-        else:
-            e.ignore()
-    
-    def dropEvent(self, e: QDropEvent) -> None:
-        file_path = e.mimeData().text().replace('file:///', '')
-        self.label.setText(file_path)
 
 
 class VideoInfo(QFrame):
