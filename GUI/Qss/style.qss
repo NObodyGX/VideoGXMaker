@@ -101,6 +101,14 @@ VideoTopSplitter {
     min-height: 200px;
 }
 
+VideoTitle {
+    background-color: #DDDDDD;
+    border: none;
+    padding: 4px;
+    max-height: 20px;
+    min-height: 20px;
+}
+
 
 
 /*

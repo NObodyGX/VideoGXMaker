@@ -14,17 +14,23 @@ class VideoPlayer(QFrame):
 
     def init_ui(self):
         self.layout = QVBoxLayout()
-        self.label = QLabel('empty!!!')
+        self.label = VideoTitle('empty!!!')
         self.player_view = QVideoWidget(self)
         self.player_view.show()
         self.player = QMediaPlayer()
         self.player.setVideoOutput(self.player_view)
         self.play_button = SwitchButton('play',  self.play, 'pause', self.pause)
         self.stop_button = StopButton('stop', self.stop)
-        self.layout.addWidget(self.label)
+
+        self.title_layout = QHBoxLayout()
+        self.title_layout.addWidget(self.label)
+        self.layout.addLayout(self.title_layout)
         self.layout.addWidget(self.player_view)
-        self.layout.addWidget(self.play_button)
-        self.layout.addWidget(self.stop_button)
+        self.button_layout = QHBoxLayout()
+        self.button_layout.addWidget(self.play_button)
+        self.button_layout.addWidget(self.stop_button)
+        self.button_layout.addStretch()
+        self.layout.addLayout(self.button_layout)
         self.setLayout(self.layout)
         self.show()
 
@@ -41,7 +47,7 @@ class VideoPlayer(QFrame):
         file_path = e.mimeData().text().replace('file:///', '')
         self.label.setText(file_path)
         self.player.setMedia(QMediaContent(QUrl.fromLocalFile(file_path)))
-        self.player.play()
+        self.play_button.click()
 
     def play(self):
         self.player.play()
@@ -51,6 +57,10 @@ class VideoPlayer(QFrame):
     
     def stop(self):
         self.player.stop()
+
+class VideoTitle(QLabel):
+    pass
+
 
 class Button(QPushButton):
     def __init__(self, text, func) -> None:
