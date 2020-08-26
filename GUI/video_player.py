@@ -19,12 +19,10 @@ class VideoPlayer(QFrame):
         self.player_view.show()
         self.player = QMediaPlayer()
         self.player.setVideoOutput(self.player_view)
-        self.pause_button = PauseButton('pause')
-        self.play_button = PauseButton('play')
-        self.stop_button = PauseButton('stop')
+        self.play_button = SwitchButton('play',  self.play, 'pause', self.pause)
+        self.stop_button = StopButton('stop', self.stop)
         self.layout.addWidget(self.label)
         self.layout.addWidget(self.player_view)
-        self.layout.addWidget(self.pause_button)
         self.layout.addWidget(self.play_button)
         self.layout.addWidget(self.stop_button)
         self.setLayout(self.layout)
@@ -32,9 +30,6 @@ class VideoPlayer(QFrame):
 
     def init_function(self):
         self.setAcceptDrops(True)
-        self.play_button.clicked.connect(self.play)
-        self.pause_button.clicked.connect(self.pause)
-        self.stop_button.clicked.connect(self.stop)
 
     def dragEnterEvent(self, e: QDragEnterEvent) -> None:
         if e.mimeData().text():
@@ -57,13 +52,31 @@ class VideoPlayer(QFrame):
     def stop(self):
         self.player.stop()
 
-class PauseButton(QPushButton):
-    pass
+class Button(QPushButton):
+    def __init__(self, text, func) -> None:
+        super().__init__(text)
+        self.clicked.connect(func)
 
-class PlayButton(QPushButton):
-    pass
+class SwitchButton(QPushButton):
+    def __init__(self, aText, aFunc, bText, bFunc) -> None:
+        super().__init__(aText)
+        self.aText = aText
+        self.bText = bText
+        self.aFunc = aFunc
+        self.bFunc = bFunc
+        self.count = 0
+        self.clicked.connect(self._func)
+    
+    def _func(self):
+        self.count += 1
+        if self.count % 2 == 1:
+            self.aFunc()
+            self.setText(self.bText)
+            return
+        self.bFunc()
+        self.setText(self.aText)
 
-class StopButton(QPushButton):
+class StopButton(Button):
     pass
 
 
