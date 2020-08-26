@@ -21,12 +21,18 @@ class TitleBar(QFrame):
         self.setFixedHeight(30)
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.label = TitleLabel('Title')
-        self.menu = FileMenu('File')
+        self.file_menu = FileMenu('File')
+        self.start_menu = FileMenu('start')
+        self.help_menu = FileMenu('help')
+        self.about_menu = FileMenu('about')
         self.min_button = MinButton('min')
         self.max_button = MaxButton('max')
         self.close_button = CloseButton('close')
         self.layout.addWidget(self.label)
-        self.layout.addWidget(self.menu)
+        self.layout.addWidget(self.file_menu)
+        self.layout.addWidget(self.start_menu)
+        self.layout.addWidget(self.help_menu)
+        self.layout.addWidget(self.about_menu)
         self.layout.addStretch(1)
         self.layout.addWidget(self.min_button)
         self.layout.addStretch(0)
@@ -87,19 +93,3 @@ class TitleMenu(QLabel):
 class FileMenu(TitleMenu):
     def __init__(self, *args, **kw):
         super().__init__(*args, **kw)
-
-    # def mousePressEvent(self, e: QMouseEvent):
-    #     if e.button() == Qt.LeftButton:
-    #         menu = TitleMenu(self)
-    #         menu.addAction(QAction('open', menu))
-    #         menu.addAction(QAction('open1', menu))
-    #         menu.addAction(QAction('open2', menu))
-    #         menu.triggered.connect(self.menuSlot)
-    #         menu.exec_(self.global_pos())
-    
-    # def menuSlot(self, action):
-    #     if action.text() == 'open':
-    #         print('do open')
-
-# class TitleMenu(QMenu):
-#     pass

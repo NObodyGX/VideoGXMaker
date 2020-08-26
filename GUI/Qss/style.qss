@@ -20,6 +20,7 @@ TitleLabel, TitleMenu {
     height: 20px;
 }
 
+
 TitleMenu:hover, TitleMenu:pressed {
     background-color: #C6C6C6; 
 }
@@ -33,6 +34,18 @@ TitleMenu::item {
 
 TitleMenu::item:selected {
     background-color: #C6C6C6;
+}
+
+FileMenu {
+    background-color: #DDDDDD;
+    border: none;
+    padding: 4px;
+    width: 120px;
+    height: 20px; 
+}
+
+FileMenu:hover, FileMenu:pressed {
+    background-color: #C6C6C6; 
 }
 
 MinButton, MaxButton, CloseButton {
