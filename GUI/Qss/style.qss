@@ -109,6 +109,19 @@ VideoTitle {
     min-height: 20px;
 }
 
+BeginButton, EndButton {
+    background-color: #DDDDDD;
+    border: none;
+    padding: 4px;
+    max-height: 20px;
+    min-height: 20px;
+    max-width: 80px;
+}
+
+BeginButton:hover, BeginButton:pressed, EndButton:hover, EndButton:pressed {
+    background-color: #C6C6C6;
+}
+
 
 
 /*

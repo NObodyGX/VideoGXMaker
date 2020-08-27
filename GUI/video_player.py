@@ -15,6 +15,8 @@ class VideoPlayer(QFrame):
     def init_ui(self):
         self.layout = QVBoxLayout()
         self.label = VideoTitle('empty!!!')
+        self.begin_button = BeginButton('begin', self.begin)
+        self.end_button = EndButton('end', self.end)
         self.player_view = QVideoWidget(self)
         self.player_view.show()
         self.player = QMediaPlayer()
@@ -26,6 +28,8 @@ class VideoPlayer(QFrame):
 
         self.title_layout = QHBoxLayout()
         self.title_layout.addWidget(self.label)
+        self.title_layout.addWidget(self.begin_button)
+        self.title_layout.addWidget(self.end_button)
         self.layout.addLayout(self.title_layout)
         self.layout.addWidget(self.player_view)
         self.button_layout = QHBoxLayout()
@@ -71,6 +75,11 @@ class VideoPlayer(QFrame):
         position = self.player.position()
         self.player.setPosition(position - 1000)
 
+    def begin(self):
+        pass
+
+    def end(self):
+        pass
 
 class VideoTitle(QLabel):
     pass
@@ -100,6 +109,13 @@ class SwitchButton(QPushButton):
         self.bFunc()
         self.setText(self.aText)
 
+
+class BeginButton(Button):
+    pass
+
+class EndButton(Button):
+    pass
+
 class StopButton(Button):
     pass
 
@@ -109,3 +125,4 @@ class NextFrameButton(Button):
 
 class LastFrameButton(Button):
     pass
+
