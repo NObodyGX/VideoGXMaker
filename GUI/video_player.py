@@ -21,6 +21,8 @@ class VideoPlayer(QFrame):
         self.player.setVideoOutput(self.player_view)
         self.play_button = SwitchButton('play',  self.play, 'pause', self.pause)
         self.stop_button = StopButton('stop', self.stop)
+        self.next_button = NextFrameButton('next', self.next_frame)
+        self.last_button = LastFrameButton('last', self.last_frame)
 
         self.title_layout = QHBoxLayout()
         self.title_layout.addWidget(self.label)
@@ -29,6 +31,8 @@ class VideoPlayer(QFrame):
         self.button_layout = QHBoxLayout()
         self.button_layout.addWidget(self.play_button)
         self.button_layout.addWidget(self.stop_button)
+        self.button_layout.addWidget(self.next_button)
+        self.button_layout.addWidget(self.last_button)
         self.button_layout.addStretch()
         self.layout.addLayout(self.button_layout)
         self.setLayout(self.layout)
@@ -57,6 +61,16 @@ class VideoPlayer(QFrame):
     
     def stop(self):
         self.player.stop()
+    
+    def next_frame(self):
+        # 这里的单位是毫秒
+        position = self.player.position()
+        self.player.setPosition(position + 1000)
+
+    def last_frame(self):
+        position = self.player.position()
+        self.player.setPosition(position - 1000)
+
 
 class VideoTitle(QLabel):
     pass
@@ -90,3 +104,8 @@ class StopButton(Button):
     pass
 
 
+class NextFrameButton(Button):
+    pass
+
+class LastFrameButton(Button):
+    pass
