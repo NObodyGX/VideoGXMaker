@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QMouseEvent, QWheelEvent
 from PyQt5.QtWidgets import QFrame, QGroupBox, QHBoxLayout, QLabel, QSpinBox, QVBoxLayout, QWidget
-
+from Utils.delay_decorator import Delayer
 
 
 class VideoMaker(QFrame):
@@ -12,7 +12,7 @@ class VideoMaker(QFrame):
         self.init_function()
         
     def init_ui(self):
-        self.layout = QVBoxLayout()
+        self.layout = QHBoxLayout()
         self.input_group = QGroupBox('Input')
         self.input_timer = TimerSpin()
         self.input_layout = QHBoxLayout()
@@ -71,6 +71,8 @@ class Spin(QLabel):
     def __init__(self, parent=None, default=0, min=0, max=60) -> None:
         super().__init__(parent)
         self.__value = 0
+        self.__left_button_stay = False
+        self.__right_button_stay = False
         self.default = default
         self.min = min
         self.max = max
@@ -101,10 +103,38 @@ class Spin(QLabel):
     def mousePressEvent(self, e: QMouseEvent) -> None:
         if e.button() == Qt.LeftButton:
             self.value += 1
+            self.__left_button_stay = True
+            self.left_button_check()
         elif e.button() == Qt.RightButton:
             self.value -= 1
+            self.__right_button_stay = True
+            self.right_button_check()
         elif e.button() == Qt.MidButton:
             self.value = self.defaultValue
+
+    def mouseReleaseEvent(self, e: QMouseEvent) -> None:
+        if e.button() == Qt.LeftButton:
+            self.__left_button_stay = False
+        elif e.button() == Qt.RightButton:
+            self.__right_button_stay = False
+
+    @Delayer.delay(0.2)
+    def left_button_check(self):
+        """
+        每0.2秒检测一次是否在按下状态
+        """
+        if self.__left_button_stay:
+            self.value += 1
+            self.left_button_check()
+    
+    @Delayer.delay(0.2)
+    def right_button_check(self):
+        """
+        每0.2秒检测一次是否在按下状态
+        """
+        if self.__right_button_stay:
+            self.value -= 1
+            self.right_button_check()
 
 
 class Template(QWidget):
