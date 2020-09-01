@@ -34,10 +34,9 @@ class VideoMaker(QFrame):
         pass
 
 
-class TimerSpin(QWidget):
-    def __init__(self, parent=None) -> None:
-        super().__init__(parent)
-        self.parent = parent
+class TimerSpin(QFrame):
+    def __init__(self, ) -> None:
+        super().__init__()
         self.x = 0
         self.y = 0
         self.z = 0
@@ -86,6 +85,9 @@ class Spin(QLabel):
     def value(self, v):
         if v >= self.min and v <= self.max:
             self.__value = int(v)
+        if self.value < 10:
+            self.setText(' ' + str(self.__value))
+            return
         self.setText(str(self.__value))
     
     def setValue(self, value):
